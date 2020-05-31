@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DR.png-a5aa7b6d15526f6e98d2812830941f4d.stex"
+path="res://.import/placehold_health-gain.PNG-0dcec58d0cc329134cc017554624d1be.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/DR.png"
-dest_files=[ "res://.import/DR.png-a5aa7b6d15526f6e98d2812830941f4d.stex" ]
+source_file="res://textures/placehold_health-gain.PNG"
+dest_files=[ "res://.import/placehold_health-gain.PNG-0dcec58d0cc329134cc017554624d1be.stex" ]
 
 [params]
 

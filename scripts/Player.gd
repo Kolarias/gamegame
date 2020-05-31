@@ -1,24 +1,35 @@
 extends KinematicBody2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+#member signals
+signal hp_change(hp)
+signal death
+
+# Member constants, enum
 const MOVE_SPEED = 550
 const MAX_SPEED = 850
-const FRICTION = 10
+const FRICTION = 1.5
+const MAX_HEALTH = 5.0
 
+enum STATUS {DEAD, ALIVE}
+
+#member variables
 var velocity = Vector2()
+var hp = MAX_HEALTH
+var state = STATUS.ALIVE
 
+#for player movement
 var _up = "p_up"
 var _down = "p_down"
 var _left = "p_left"
 var _right = "p_right"
 
+#for aiming
 var _lookUp = "l_up"
 var _lookDown = "l_down"
 var _lookLeft = "l_left"
 var _lookRight = "l_right"
 
+#for player actions
 var _interact = "p_interact"
 
 var _abilityOne = "p_one"
@@ -32,7 +43,7 @@ onready var _screen_size_x = get_viewport_rect().size.x
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass #initialize something at some point, until then pass function
+	emit_signal("hp_change", self) #initialize hp bar
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -57,13 +68,27 @@ func _physics_process(delta):
 	else:
 		if velocity.x < 0: velocity.x = -MAX_SPEED
 		if velocity.x > 0: velocity.x = MAX_SPEED
-	#creates movement based on velocity vector
 	
+	#changes the direction the player is facing to aim
 	var lookX = Input.get_action_strength(_lookRight) -  Input.get_action_strength(_lookLeft)
-
 	var lookY = Input.get_action_strength(_lookDown) -  Input.get_action_strength(_lookUp)
-
 	get_child(0).look(lookX,lookY)
 	
+	#creates movement based on velocity vector
 	move_and_slide(velocity)
-	
+
+#a function that handles player damage
+func take_dmg(dmg):
+	hp -= dmg
+	emit_signal("hp_change", self)
+	#check for death
+	if hp <= 0:
+		state = STATUS.DEAD
+		$Death.play("Death")
+		emit_signal("death")
+	elif dmg > 0:
+		$Hit.play("Hit")
+
+#take damage when entering aoe damage area
+func _on_aoe_dmg_body_shape_entered(body_id, body, body_shape, area_shape):
+	take_dmg(1)
