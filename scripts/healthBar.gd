@@ -13,4 +13,4 @@ func _ready():
 
 #receives signal from player function, changes value of hp
 func _on_Player_hp_change(player):
-	value = player.hp
+	value = ( player.hp / player.MAX_HEALTH ) * 100
