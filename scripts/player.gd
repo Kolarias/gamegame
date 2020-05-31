@@ -8,7 +8,7 @@ signal death
 const MOVE_SPEED = 500
 const MAX_SPEED = 3000
 const FRICTION = 1.1
-const MAX_HEALTH = 5
+const MAX_HEALTH = 5.0
 
 enum STATUS {DEAD, ALIVE}
 
@@ -54,6 +54,7 @@ func _physics_process(delta):
 #a function that handles player damage
 func take_dmg(dmg):
 	hp -= dmg
+	emit_signal("hp_change", self)
 	#check for death
 	if hp <= 0:
 		state = STATUS.DEAD
@@ -61,7 +62,6 @@ func take_dmg(dmg):
 		emit_signal("death")
 	else: if dmg > 0:
 		$Hit.play("Hit")
-		emit_signal("hp_change", self)
 
 #take damage when entering aoe damage area
 func _on_aoe_dmg_body_shape_entered(body_id, body, body_shape, area_shape):
