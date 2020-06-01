@@ -133,3 +133,7 @@ func take_dmg(dmg):
 #take damage when entering aoe damage area
 func _on_aoe_dmg_body_shape_entered(body_id, body, body_shape, area_shape):
 	take_dmg(1)
+
+#take damage when touching enemy
+func _on_Area2D_body_shape_entered(body_id, body, body_shape, area_shape):
+	take_dmg(1)
