@@ -9,8 +9,8 @@ signal ability_gui
 # Member constants, enum
 const MOVE_SPEED = 550
 const MAX_SPEED = 850
-const FRICTION = 1.5
-const MAX_HEALTH = 5.0
+const FRICTION = 4
+const MAX_HEALTH = 20.0
 const SPECIAL_RDY = 10.0
 
 enum STATUS {DEAD, ALIVE}
@@ -149,4 +149,8 @@ func take_dmg(dmg):
 
 #take damage when entering aoe damage area
 func _on_aoe_dmg_body_shape_entered(body_id, body, body_shape, area_shape):
+	take_dmg(1)
+
+#take damage when touching enemy
+func _on_Area2D_body_shape_entered(body_id, body, body_shape, area_shape):
 	take_dmg(1)
