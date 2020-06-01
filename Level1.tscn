@@ -70,7 +70,7 @@ position = Vector2( 383.633, 231.32 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Player"]
-modulate = Color( 0.678431, 0.0627451, 0.0627451, 1 )
+modulate = Color( 0.141176, 0.0627451, 0.678431, 1 )
 scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 1 )
 script = ExtResource( 3 )
@@ -91,7 +91,7 @@ __meta__ = {
 
 [node name="Health" type="TextureProgress" parent="Player/Camera2D/GUI bars"]
 margin_right = 203.0
-margin_bottom = 26.0
+margin_bottom = 35.0
 texture_progress = ExtResource( 4 )
 script = ExtResource( 5 )
 

@@ -7,7 +7,7 @@ signal death
 # Member constants, enum
 const MOVE_SPEED = 550
 const MAX_SPEED = 850
-const FRICTION = 1.5
+const FRICTION = 4
 const MAX_HEALTH = 5.0
 
 enum STATUS {DEAD, ALIVE}
