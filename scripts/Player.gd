@@ -89,7 +89,7 @@ func _physics_process(delta):
 		get_child(0).abilityOne()
 	elif abilityTwo > 0 && abilityTwoCoolDown <= 0:
 		get_child(0).abilityTwo()
-		abilityTwoCoolDown = 20
+		abilityTwoCoolDown = 12
 	elif abilityThree > 0 && abilityThreeCoolDown <= 0:
 		get_child(0).abilityThree()
 		abilityThreeCoolDown = 10
