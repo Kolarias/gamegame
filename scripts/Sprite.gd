@@ -32,4 +32,4 @@ func abilityFour():
 	set_texture(load("textures//abilityFour.png"))
 	
 func abilitySpecial():
-	set_texture(load("textures//abilitySpecial.png"))
+	set_texture(load("textures//abilitySpeical.png"))
