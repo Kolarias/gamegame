@@ -95,7 +95,7 @@ func _physics_process(delta):
 		abilityThreeCoolDown = 10
 	elif abilityFour > 0 && abilityFourCoolDown <= 0:
 		get_child(0).abilityFour()
-		abilityFourCoolDown = 40
+		abilityFourCoolDown = 34
 	elif abilitySpecial > 0 && abilitySpecialCoolDown <= 0:
 		get_child(0).abilitySpecial()
 		abilitySpecialCoolDown = 10000

@@ -57,10 +57,10 @@ extents = Vector2( 10, 292.449 )
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 120.794, 279.369 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 16.774, 16.1683 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 29.5868, 31.4095 )
 
 [node name="Level" type="Node2D"]
@@ -179,13 +179,13 @@ texture = ExtResource( 7 )
 
 [node name="Collision Area" type="CollisionShape2D" parent="Enemy"]
 position = Vector2( 0.475662, 0.951309 )
-shape = SubResource( 10 )
+shape = SubResource( 9 )
 
 [node name="Area2D" type="Area2D" parent="Enemy"]
 
 [node name="Damage Area" type="CollisionShape2D" parent="Enemy/Area2D"]
 position = Vector2( 0.257034, 1.02809 )
-shape = SubResource( 11 )
+shape = SubResource( 10 )
 [connection signal="hp_change" from="Player" to="Player/Camera2D/GUI bars/Health" method="_on_Player_hp_change"]
 [connection signal="area_entered" from="aoe_dmg" to="Player" method="_on_aoe_dmg_area_entered"]
 [connection signal="body_shape_entered" from="aoe_dmg" to="Player" method="_on_aoe_dmg_body_shape_entered"]
