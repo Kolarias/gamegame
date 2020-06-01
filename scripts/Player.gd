@@ -7,9 +7,9 @@ signal spc_count_change
 signal ability_gui
 
 # Member constants, enum
-const MOVE_SPEED = 770
+const MOVE_SPEED = 550
 const MAX_SPEED = 850
-const FRICTION = 2.7
+const FRICTION = 4
 const MAX_HEALTH = 20.0
 const SPECIAL_RDY = 10.0
 
@@ -108,11 +108,7 @@ func _physics_process(delta):
 		abilityThreeCoolDown = COOLDOWN.THREE
 	elif abilityFour > 0 && abilityFourCoolDown <= 0:
 		get_child(0).abilityFour()
-<<<<<<< HEAD
-		abilityFourCoolDown = 34
-=======
 		abilityFourCoolDown = COOLDOWN.FOUR
->>>>>>> 50f1b4480772ba37e4847a8a5740ebdcc5ea007f
 	elif abilitySpecial > 0 && abilitySpecialCoolDown <= 0:
 		get_child(0).abilitySpecial()
 		abilitySpecialCoolDown = 10000

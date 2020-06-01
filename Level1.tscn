@@ -239,10 +239,7 @@ shape = SubResource( 9 )
 [node name="Damage Area" type="CollisionShape2D" parent="Enemy/Area2D"]
 position = Vector2( 0.257034, 1.02809 )
 shape = SubResource( 10 )
-<<<<<<< HEAD
-=======
 [connection signal="ability_gui" from="Player" to="Player/Camera2D/GUI bars/AbilityGUI" method="_on_Player_ability_gui"]
->>>>>>> 50f1b4480772ba37e4847a8a5740ebdcc5ea007f
 [connection signal="hp_change" from="Player" to="Player/Camera2D/GUI bars/Health" method="_on_Player_hp_change"]
 [connection signal="spc_count_change" from="Player" to="Player/Camera2D/GUI bars/SpecialBar" method="_on_Player_spc_count_change"]
 [connection signal="area_entered" from="aoe_dmg" to="Player" method="_on_aoe_dmg_area_entered"]
