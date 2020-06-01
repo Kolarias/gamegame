@@ -18,3 +18,18 @@ func look(x,y):
 	elif (y > 0) && (x < 0): set_texture(load("textures//DL.png"))
 	elif (y > 0) && (x == 0): set_texture(load("textures//DN.png"))
 	elif (y > 0) && (x > 0): set_texture(load("textures//DR.png"))
+
+func abilityOne():
+	set_texture(load("textures//abilityOne.png"))
+	
+func abilityTwo():
+	set_texture(load("textures//abilityTwo.png"))
+	
+func abilityThree():
+	set_texture(load("textures//abilityThree.png"))
+	
+func abilityFour():
+	set_texture(load("textures//abilityFour.png"))
+	
+func abilitySpecial():
+	set_texture(load("textures//abilitySpeical.png"))

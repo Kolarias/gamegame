@@ -38,6 +38,15 @@ var _abilityThree = "p_three"
 var _abilityFour = "p_four"
 var _abilitySpecial = "p_special"
 
+var abilityOneCoolDown = 0
+var abilityTwoCoolDown = 0
+var abilityThreeCoolDown = 0
+var abilityFourCoolDown = 0
+
+var timer = 0
+
+var abilitySpecialCoolDown = 0
+
 onready var _screen_size_y = get_viewport_rect().size.y
 onready var _screen_size_x = get_viewport_rect().size.x
 
@@ -47,8 +56,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	#get y input
+	var inputX = Input.get_action_strength(_right) - Input.get_action_strength(_left)
 	var inputY = Input.get_action_strength(_down) - Input.get_action_strength(_up)
+	var lookX = Input.get_action_strength(_lookRight) -  Input.get_action_strength(_lookLeft)
+	var lookY = Input.get_action_strength(_lookDown) -  Input.get_action_strength(_lookUp)
+	var abilityOne = Input.get_action_strength(_abilityOne)
+	var abilityTwo = Input.get_action_strength(_abilityTwo)
+	var abilityThree = Input.get_action_strength(_abilityThree)
+	var abilityFour = Input.get_action_strength(_abilityFour)
+	var abilitySpecial = Input.get_action_strength(_abilitySpecial)
+	#get y input
 	#reduce velocity y by friction constant when no y velocity is input
 	if inputY == 0: velocity.y /= FRICTION 
 	if abs(velocity.y) < MAX_SPEED:
@@ -58,7 +75,6 @@ func _physics_process(delta):
 		if velocity.y < 0: velocity.y = -MAX_SPEED
 		if velocity.y > 0: velocity.y = MAX_SPEED
 	#get x input
-	var inputX = Input.get_action_strength(_right) - Input.get_action_strength(_left)
 	#reduce velocity x by friction constant when no x velocity is input
 	if inputX == 0: velocity.x /= FRICTION
 	#increase velocity x when 
@@ -69,9 +85,34 @@ func _physics_process(delta):
 		if velocity.x < 0: velocity.x = -MAX_SPEED
 		if velocity.x > 0: velocity.x = MAX_SPEED
 	
+	if abilityOne > 0 && abilityOneCoolDown <= 0:
+		get_child(0).abilityOne()
+	elif abilityTwo > 0 && abilityTwoCoolDown <= 0:
+		get_child(0).abilityTwo()
+		abilityTwoCoolDown = 20
+	elif abilityThree > 0 && abilityThreeCoolDown <= 0:
+		get_child(0).abilityThree()
+		abilityThreeCoolDown = 10
+	elif abilityFour > 0 && abilityFourCoolDown <= 0:
+		get_child(0).abilityFour()
+		abilityFourCoolDown = 40
+	elif abilitySpecial > 0 && abilitySpecialCoolDown <= 0:
+		get_child(0).abilitySpecial()
+		abilitySpecialCoolDown = 10000
+	
+	if timer > .2:
+		abilityOneCoolDown -= 1
+		abilityTwoCoolDown -= 1
+		abilityThreeCoolDown -= 1
+		abilityFourCoolDown -= 1
+		timer = 0
+		
+	#temp
+	abilitySpecialCoolDown = 0
+	
+	timer += delta
+	
 	#changes the direction the player is facing to aim
-	var lookX = Input.get_action_strength(_lookRight) -  Input.get_action_strength(_lookLeft)
-	var lookY = Input.get_action_strength(_lookDown) -  Input.get_action_strength(_lookUp)
 	get_child(0).look(lookX,lookY)
 	
 	#creates movement based on velocity vector
