@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://textures/yap1b9yc9k001.jpg" type="Texture" id=1]
+[ext_resource path="res://textures/NR.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=3]
 [ext_resource path="res://textures/placehold_health-gain.PNG" type="Texture" id=4]
@@ -15,8 +15,8 @@
 [ext_resource path="res://scripts/AbilityGUI.gd" type="Script" id=13]
 [ext_resource path="res://textures/specialGUI.PNG" type="Texture" id=14]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 40.799, 40.0781 )
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 20.467, 20.2783 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Hit"
@@ -85,6 +85,7 @@ position = Vector2( 383.633, 231.32 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Player"]
+position = Vector2( 0, 1 )
 scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 1 )
 script = ExtResource( 3 )
@@ -158,8 +159,8 @@ fill_mode = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 visible = false
 modulate = Color( 0.160784, 0.8, 0.592157, 1 )
-position = Vector2( 1.90002, 0.958313 )
-shape = SubResource( 1 )
+position = Vector2( -0.0999799, 0.958313 )
+shape = SubResource( 11 )
 
 [node name="Hit" type="AnimationPlayer" parent="Player"]
 anims/Hit = SubResource( 2 )
