@@ -1,6 +1,6 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=30 format=2]
 
-[ext_resource path="res://textures/yap1b9yc9k001.jpg" type="Texture" id=1]
+[ext_resource path="res://textures/charOne.PNG" type="Texture" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://scripts/Sprite.gd" type="Script" id=3]
 [ext_resource path="res://textures/placehold_health-gain.PNG" type="Texture" id=4]
@@ -14,9 +14,12 @@
 [ext_resource path="res://scripts/SpecialBar.gd" type="Script" id=12]
 [ext_resource path="res://scripts/AbilityGUI.gd" type="Script" id=13]
 [ext_resource path="res://textures/specialGUI.PNG" type="Texture" id=14]
+[ext_resource path="res://scripts/SpriteTwo.gd" type="Script" id=15]
+[ext_resource path="res://textures/charTwo.png" type="Texture" id=16]
+[ext_resource path="res://scripts/Players.gd" type="Script" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 40.799, 40.0781 )
+extents = Vector2( 23.2589, 23.5051 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Hit"
@@ -49,52 +52,89 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 508.44, 10 )
+[sub_resource type="Animation" id=4]
+resource_name = "Hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.141176, 0.0627451, 0.678431, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 512.916, 10 )
+[sub_resource type="Animation" id=5]
+resource_name = "Death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 10, 297.891 )
+extents = Vector2( 508.44, 10 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 10, 292.449 )
+extents = Vector2( 512.916, 10 )
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 120.794, 279.369 )
+extents = Vector2( 10, 297.891 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 16.774, 16.1683 )
+extents = Vector2( 10, 292.449 )
 
 [sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 120.794, 279.369 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 16.774, 16.1683 )
+
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 29.5868, 31.4095 )
 
 [node name="Level" type="Node2D"]
 
 [node name="Background" type="ColorRect" parent="."]
-margin_right = 1023.0
-margin_bottom = 600.0
+margin_left = 3.67548
+margin_top = 5.14565
+margin_right = 1026.68
+margin_bottom = 605.146
 color = Color( 0.176471, 0.0941176, 0.0941176, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Player" type="KinematicBody2D" parent="."]
+[node name="Players" type="Area2D" parent="."]
+script = ExtResource( 17 )
+
+[node name="Player" type="KinematicBody2D" parent="Players"]
 position = Vector2( 383.633, 231.32 )
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="Player"]
-scale = Vector2( 0.08, 0.08 )
+[node name="Sprite" type="Sprite" parent="Players/Player"]
+position = Vector2( 0.735046, 0.735107 )
+scale = Vector2( 0.35783, 0.386289 )
 texture = ExtResource( 1 )
 script = ExtResource( 3 )
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="Players/Player"]
 position = Vector2( -441.527, -239.741 )
 anchor_mode = 0
 current = true
 
-[node name="GUI bars" type="VBoxContainer" parent="Player/Camera2D"]
+[node name="GUI bars" type="VBoxContainer" parent="Players/Player/Camera2D"]
 margin_left = 23.0
 margin_top = 15.0
 margin_right = 249.0
@@ -103,20 +143,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Health" type="TextureProgress" parent="Player/Camera2D/GUI bars"]
+[node name="Health" type="TextureProgress" parent="Players/Player/Camera2D/GUI bars"]
 margin_right = 226.0
 margin_bottom = 35.0
 texture_progress = ExtResource( 4 )
 script = ExtResource( 5 )
 
-[node name="SpecialBar" type="TextureProgress" parent="Player/Camera2D/GUI bars"]
+[node name="SpecialBar" type="TextureProgress" parent="Players/Player/Camera2D/GUI bars"]
 margin_top = 39.0
 margin_right = 226.0
 margin_bottom = 85.0
 texture_progress = ExtResource( 14 )
 script = ExtResource( 12 )
 
-[node name="AbilityGUI" type="HBoxContainer" parent="Player/Camera2D/GUI bars"]
+[node name="AbilityGUI" type="HBoxContainer" parent="Players/Player/Camera2D/GUI bars"]
 margin_top = 89.0
 margin_right = 226.0
 margin_bottom = 140.0
@@ -125,13 +165,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AOne" type="TextureProgress" parent="Player/Camera2D/GUI bars/AbilityGUI"]
+[node name="AOne" type="TextureProgress" parent="Players/Player/Camera2D/GUI bars/AbilityGUI"]
 margin_right = 49.0
 margin_bottom = 51.0
 texture_progress = ExtResource( 8 )
 fill_mode = 4
 
-[node name="ATwo" type="TextureProgress" parent="Player/Camera2D/GUI bars/AbilityGUI"]
+[node name="ATwo" type="TextureProgress" parent="Players/Player/Camera2D/GUI bars/AbilityGUI"]
 margin_left = 53.0
 margin_right = 108.0
 margin_bottom = 51.0
@@ -141,56 +181,143 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AThree" type="TextureProgress" parent="Player/Camera2D/GUI bars/AbilityGUI"]
+[node name="AThree" type="TextureProgress" parent="Players/Player/Camera2D/GUI bars/AbilityGUI"]
 margin_left = 112.0
 margin_right = 159.0
 margin_bottom = 51.0
 texture_progress = ExtResource( 9 )
 fill_mode = 4
 
-[node name="AFour" type="TextureProgress" parent="Player/Camera2D/GUI bars/AbilityGUI"]
+[node name="AFour" type="TextureProgress" parent="Players/Player/Camera2D/GUI bars/AbilityGUI"]
 margin_left = 163.0
 margin_right = 216.0
 margin_bottom = 51.0
 texture_progress = ExtResource( 11 )
 fill_mode = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Players/Player"]
+modulate = Color( 0.160784, 0.8, 0.592157, 1 )
+position = Vector2( 1.16491, 0.958313 )
+shape = SubResource( 1 )
+
+[node name="Hit" type="AnimationPlayer" parent="Players/Player"]
+anims/Hit = SubResource( 2 )
+
+[node name="Death" type="AnimationPlayer" parent="Players/Player"]
+anims/Death = SubResource( 3 )
+
+[node name="Player2" type="KinematicBody2D" parent="Players"]
+position = Vector2( 383.633, 231.32 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Players/Player2"]
+position = Vector2( 1.8475, 0.911744 )
+scale = Vector2( 0.335311, 0.346875 )
+texture = ExtResource( 16 )
+script = ExtResource( 15 )
+
+[node name="Camera2D" type="Camera2D" parent="Players/Player2"]
+position = Vector2( -441.527, -239.741 )
+anchor_mode = 0
+current = true
+
+[node name="GUI bars" type="VBoxContainer" parent="Players/Player2/Camera2D"]
+margin_left = 23.0
+margin_top = 15.0
+margin_right = 249.0
+margin_bottom = 155.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" type="TextureProgress" parent="Players/Player2/Camera2D/GUI bars"]
+margin_right = 226.0
+margin_bottom = 35.0
+texture_progress = ExtResource( 4 )
+script = ExtResource( 5 )
+
+[node name="SpecialBar" type="TextureProgress" parent="Players/Player2/Camera2D/GUI bars"]
+margin_top = 39.0
+margin_right = 226.0
+margin_bottom = 85.0
+texture_progress = ExtResource( 14 )
+script = ExtResource( 12 )
+
+[node name="AbilityGUI" type="HBoxContainer" parent="Players/Player2/Camera2D/GUI bars"]
+margin_top = 89.0
+margin_right = 226.0
+margin_bottom = 140.0
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AOne" type="TextureProgress" parent="Players/Player2/Camera2D/GUI bars/AbilityGUI"]
+margin_right = 49.0
+margin_bottom = 51.0
+texture_progress = ExtResource( 8 )
+fill_mode = 4
+
+[node name="ATwo" type="TextureProgress" parent="Players/Player2/Camera2D/GUI bars/AbilityGUI"]
+margin_left = 53.0
+margin_right = 108.0
+margin_bottom = 51.0
+texture_progress = ExtResource( 10 )
+fill_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AThree" type="TextureProgress" parent="Players/Player2/Camera2D/GUI bars/AbilityGUI"]
+margin_left = 112.0
+margin_right = 159.0
+margin_bottom = 51.0
+texture_progress = ExtResource( 9 )
+fill_mode = 4
+
+[node name="AFour" type="TextureProgress" parent="Players/Player2/Camera2D/GUI bars/AbilityGUI"]
+margin_left = 163.0
+margin_right = 216.0
+margin_bottom = 51.0
+texture_progress = ExtResource( 11 )
+fill_mode = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Players/Player2"]
 visible = false
 modulate = Color( 0.160784, 0.8, 0.592157, 1 )
 position = Vector2( 1.90002, 0.958313 )
 shape = SubResource( 1 )
 
-[node name="Hit" type="AnimationPlayer" parent="Player"]
-anims/Hit = SubResource( 2 )
+[node name="Hit" type="AnimationPlayer" parent="Players/Player2"]
+anims/Hit = SubResource( 4 )
 
-[node name="Death" type="AnimationPlayer" parent="Player"]
-anims/Death = SubResource( 3 )
+[node name="Death" type="AnimationPlayer" parent="Players/Player2"]
+anims/Death = SubResource( 5 )
 
 [node name="lvl_wall" type="StaticBody2D" parent="."]
 position = Vector2( -363.179, -67.652 )
 
 [node name="Ceiling" type="CollisionShape2D" parent="lvl_wall"]
 position = Vector2( 874.187, 63.4443 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="Floor" type="CollisionShape2D" parent="lvl_wall"]
 position = Vector2( 876.082, 670.665 )
-shape = SubResource( 5 )
+shape = SubResource( 7 )
 
 [node name="Right" type="CollisionShape2D" parent="lvl_wall"]
 position = Vector2( 1393.02, 361.86 )
-shape = SubResource( 6 )
+shape = SubResource( 8 )
 
 [node name="Left" type="CollisionShape2D" parent="lvl_wall"]
 position = Vector2( 361.86, 370.022 )
-shape = SubResource( 7 )
+shape = SubResource( 9 )
 
 [node name="aoe_dmg" type="Area2D" parent="."]
 
 [node name="aoe" type="CollisionShape2D" parent="aoe_dmg"]
 position = Vector2( 833.57, 297.534 )
-shape = SubResource( 8 )
+shape = SubResource( 10 )
 
 [node name="ColorRect" type="ColorRect" parent="aoe_dmg"]
 margin_left = 713.0
@@ -232,16 +359,19 @@ texture = ExtResource( 7 )
 
 [node name="Collision Area" type="CollisionShape2D" parent="Enemy"]
 position = Vector2( 0.475662, 0.951309 )
-shape = SubResource( 9 )
+shape = SubResource( 11 )
 
 [node name="Area2D" type="Area2D" parent="Enemy"]
 
 [node name="Damage Area" type="CollisionShape2D" parent="Enemy/Area2D"]
 position = Vector2( 0.257034, 1.02809 )
-shape = SubResource( 10 )
-[connection signal="ability_gui" from="Player" to="Player/Camera2D/GUI bars/AbilityGUI" method="_on_Player_ability_gui"]
-[connection signal="hp_change" from="Player" to="Player/Camera2D/GUI bars/Health" method="_on_Player_hp_change"]
-[connection signal="spc_count_change" from="Player" to="Player/Camera2D/GUI bars/SpecialBar" method="_on_Player_spc_count_change"]
-[connection signal="area_entered" from="aoe_dmg" to="Player" method="_on_aoe_dmg_area_entered"]
-[connection signal="body_shape_entered" from="aoe_dmg" to="Player" method="_on_aoe_dmg_body_shape_entered"]
-[connection signal="body_shape_entered" from="Enemy/Area2D" to="Player" method="_on_Area2D_body_shape_entered"]
+shape = SubResource( 12 )
+[connection signal="ability_gui" from="Players/Player" to="Players/Player/Camera2D/GUI bars/AbilityGUI" method="_on_Player_ability_gui"]
+[connection signal="hp_change" from="Players/Player" to="Players/Player/Camera2D/GUI bars/Health" method="_on_Player_hp_change"]
+[connection signal="spc_count_change" from="Players/Player" to="Players/Player/Camera2D/GUI bars/SpecialBar" method="_on_Player_spc_count_change"]
+[connection signal="ability_gui" from="Players/Player2" to="Players/Player2/Camera2D/GUI bars/AbilityGUI" method="_on_Player_ability_gui"]
+[connection signal="hp_change" from="Players/Player2" to="Players/Player2/Camera2D/GUI bars/Health" method="_on_Player_hp_change"]
+[connection signal="spc_count_change" from="Players/Player2" to="Players/Player2/Camera2D/GUI bars/SpecialBar" method="_on_Player_spc_count_change"]
+[connection signal="area_entered" from="aoe_dmg" to="Players/Player" method="_on_aoe_dmg_area_entered"]
+[connection signal="body_shape_entered" from="aoe_dmg" to="Players/Player" method="_on_aoe_dmg_body_shape_entered"]
+[connection signal="body_shape_entered" from="Enemy/Area2D" to="Players/Player" method="_on_Area2D_body_shape_entered"]

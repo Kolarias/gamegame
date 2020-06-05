@@ -7,7 +7,7 @@ extends Sprite
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_texture(load("textures//charOne.png"))
+	set_texture(load("textures//charTwo.png"))
 
 func look(x,y):
 	if (y == 0) && (x > 0): set_texture(load("textures//NR.png"))

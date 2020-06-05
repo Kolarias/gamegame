@@ -9,7 +9,7 @@ signal ability_gui
 # Member constants, enum
 const MOVE_SPEED = 550
 const MAX_SPEED = 850
-const FRICTION = 4
+const FRICTION = 1.5
 const MAX_HEALTH = 20.0
 const SPECIAL_RDY = 10.0
 
