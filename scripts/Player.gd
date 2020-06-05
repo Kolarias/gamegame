@@ -9,7 +9,7 @@ signal ability_gui
 # Member constants, enum
 const MOVE_SPEED = 550
 const MAX_SPEED = 850
-const FRICTION = 1.5
+const FRICTION = 2.8
 const MAX_HEALTH = 20.0
 const SPECIAL_RDY = 10.0
 
@@ -21,6 +21,13 @@ var velocity = Vector2()
 var hp = MAX_HEALTH
 var state = STATUS.ALIVE
 var specialCount = SPECIAL_RDY
+
+#use to give more health and damage 
+#maybe put this and the special counter in an if looking for kills
+var level = 0
+#put in 0s for all items and then just increment the correct index
+#when the player comes in contact with an item
+var items = [0,0,0]
 
 #for player movement
 var _up = "p_up"
