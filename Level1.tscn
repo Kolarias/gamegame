@@ -211,6 +211,7 @@ position = Vector2( 383.633, 231.32 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Players/Player2"]
+modulate = Color( 0.141176, 0.0627451, 0.678431, 1 )
 position = Vector2( 1.8475, 0.911744 )
 scale = Vector2( 0.335311, 0.346875 )
 texture = ExtResource( 16 )
@@ -283,7 +284,6 @@ texture_progress = ExtResource( 11 )
 fill_mode = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Players/Player2"]
-visible = false
 modulate = Color( 0.160784, 0.8, 0.592157, 1 )
 position = Vector2( 1.90002, 0.958313 )
 shape = SubResource( 1 )
@@ -372,6 +372,7 @@ shape = SubResource( 12 )
 [connection signal="ability_gui" from="Players/Player2" to="Players/Player2/Camera2D/GUI bars/AbilityGUI" method="_on_Player_ability_gui"]
 [connection signal="hp_change" from="Players/Player2" to="Players/Player2/Camera2D/GUI bars/Health" method="_on_Player_hp_change"]
 [connection signal="spc_count_change" from="Players/Player2" to="Players/Player2/Camera2D/GUI bars/SpecialBar" method="_on_Player_spc_count_change"]
-[connection signal="area_entered" from="aoe_dmg" to="Players/Player" method="_on_aoe_dmg_area_entered"]
+[connection signal="body_shape_entered" from="aoe_dmg" to="Players/Player2" method="_on_aoe_dmg_body_shape_entered"]
 [connection signal="body_shape_entered" from="aoe_dmg" to="Players/Player" method="_on_aoe_dmg_body_shape_entered"]
+[connection signal="body_shape_entered" from="Enemy/Area2D" to="Players/Player2" method="_on_Area2D_body_shape_entered"]
 [connection signal="body_shape_entered" from="Enemy/Area2D" to="Players/Player" method="_on_Area2D_body_shape_entered"]
